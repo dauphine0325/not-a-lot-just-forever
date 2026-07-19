@@ -289,4 +289,61 @@ p.className="petal";
 
 p.innerHTML="❀";
 
-p.style.left
+p.style.left=Math.random()*100+"%";
+
+p.style.animationDuration=6+Math.random()*8+"s";
+
+p.style.animationDelay=Math.random()*6+"s";
+
+document.body.appendChild(p);
+
+}
+
+const no=document.getElementById("no");
+
+no.addEventListener("mouseover",()=>{
+
+const x=Math.random()*(window.innerWidth-120);
+
+const y=Math.random()*(window.innerHeight-80);
+
+no.style.left=x+"px";
+
+no.style.top=y+"px";
+
+});
+
+document.getElementById("yes").onclick=()=>{
+
+document.querySelector(".buttons").style.display="none";
+
+document.getElementById("result").style.display="block";
+
+for(let i=0;i<70;i++){
+
+setTimeout(()=>{
+
+let h=document.createElement("div");
+
+h.className="heart";
+
+h.innerHTML="❤️";
+
+h.style.left=Math.random()*100+"vw";
+
+h.style.top="80vh";
+
+document.body.appendChild(h);
+
+setTimeout(()=>h.remove(),4000);
+
+},i*70);
+
+}
+
+};
+
+</script>
+
+</body>
+</html>
