@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -9,110 +10,174 @@
 <style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:"Georgia",serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Georgia",serif;
 }
+
 
 body{
-    height:100vh;
-    overflow:hidden;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    color:#3b3035;
-    background:
-    linear-gradient(135deg,#f8eee9,#f5dfe3,#faf7f2);
+
+height:100vh;
+overflow:hidden;
+
+background:
+linear-gradient(135deg,#faf1eb,#f4dfe4);
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+color:#4b3940;
+
+}
+
+
+
+/* arka plan */
+
+.bg{
+
+position:absolute;
+width:100%;
+height:100%;
+overflow:hidden;
+
 }
 
 
-/* küçük ışık efektleri */
+.dot{
 
-.glow{
-    position:absolute;
-    width:400px;
-    height:400px;
-    background:#e8a7b5;
-    filter:blur(100px);
-    opacity:.35;
+position:absolute;
+
+width:5px;
+height:5px;
+
+background:#c58b98;
+
+border-radius:50%;
+
+opacity:.5;
+
+animation:float 8s infinite linear;
+
+}
+
+
+@keyframes float{
+
+from{
+transform:translateY(100vh);
+}
+
+to{
+transform:translateY(-10vh);
+}
+
 }
 
 
-/* yıldızlar */
 
-.star{
-    position:absolute;
-    width:3px;
-    height:3px;
-    background:#b98b94;
-    border-radius:50%;
-    animation:shine 4s infinite;
+
+/* sayfalar */
+
+
+.page{
+
+position:absolute;
+
+width:90%;
+max-width:650px;
+
+text-align:center;
+
+padding:40px;
+
+background:rgba(255,255,255,.55);
+
+backdrop-filter:blur(15px);
+
+border-radius:30px;
+
+box-shadow:
+0 20px 50px rgba(120,70,80,.15);
+
+
+opacity:0;
+
+pointer-events:none;
+
+transform:translateY(30px);
+
+transition:.8s;
+
+
 }
 
-@keyframes shine{
-    50%{
-        opacity:.2;
-    }
-}
 
+.page.active{
 
+opacity:1;
 
-/* ana kutu */
+pointer-events:auto;
 
-.container{
-
-    width:90%;
-    max-width:650px;
-    text-align:center;
-    background:rgba(255,255,255,.55);
-    backdrop-filter:blur(15px);
-    padding:40px;
-    border-radius:25px;
-    box-shadow:
-    0 20px 50px rgba(100,50,60,.15);
+transform:translateY(0);
 
 }
+
 
 
 
 /* plak */
 
+
 .record{
 
-    width:180px;
-    height:180px;
-    margin:auto;
+width:190px;
+height:190px;
 
-    border-radius:50%;
+margin:auto;
 
-    background:
-    radial-gradient(circle,
-    #c47b8b 0 10%,
-    #3c3035 11% 30%,
-    #54434a 31% 50%,
-    #211b1e 51%);
 
-    animation:spin 12s linear infinite;
+border-radius:50%;
 
-    box-shadow:
-    0 10px 30px rgba(0,0,0,.25);
+
+background:
+
+radial-gradient(circle,
+#d59aaa 0 10%,
+#3d3337 11% 30%,
+#211d20 31% 60%,
+#080808 61%);
+
+
+animation:spin 10s linear infinite;
+
+
+box-shadow:
+0 15px 30px rgba(0,0,0,.25);
 
 }
 
 
 .record:after{
 
-    content:"";
+content:"";
 
-    width:35px;
-    height:35px;
+display:block;
 
-    background:#f4d8dd;
+width:35px;
+height:35px;
 
-    border-radius:50%;
+background:#f7dce2;
 
-    position:absolute;
+border-radius:50%;
+
+position:relative;
+
+top:77px;
+left:77px;
 
 }
 
@@ -120,9 +185,9 @@ body{
 
 @keyframes spin{
 
-    to{
-        transform:rotate(360deg);
-    }
+to{
+transform:rotate(360deg);
+}
 
 }
 
@@ -130,67 +195,119 @@ body{
 
 h1{
 
-    margin-top:25px;
+margin-top:25px;
 
-    letter-spacing:8px;
+font-size:42px;
 
-    color:#9d4d62;
+letter-spacing:8px;
 
-    font-size:42px;
-
-}
-
-
-
-#text{
-
-    margin:30px auto;
-
-    font-size:20px;
-
-    line-height:1.8;
-
-    min-height:100px;
+color:#a8566b;
 
 }
 
 
 
-/* BUTONLAR */
+.text{
 
-.buttons{
+margin:30px 0;
 
-    display:flex;
+font-size:20px;
 
-    justify-content:center;
+line-height:1.8;
 
-    align-items:center;
-
-    gap:25px;
-
-    margin-top:30px;
-
-    position:relative;
+min-height:100px;
 
 }
+
 
 
 
 button{
 
-    position:relative !important;
+border:none;
 
-    padding:15px 35px;
+padding:15px 35px;
 
-    border:none;
+border-radius:40px;
 
-    border-radius:40px;
+font-size:17px;
 
-    cursor:pointer;
+cursor:pointer;
 
-    font-size:17px;
+transition:.3s;
 
-    transition:.3s;
+}
+
+
+
+.next{
+
+background:#b9687d;
+
+color:white;
+
+}
+
+
+
+.next:hover{
+
+transform:translateY(-5px);
+
+}
+
+
+
+
+/* mektup */
+
+
+.letter{
+
+background:#fffaf0;
+
+padding:35px;
+
+border-radius:10px;
+
+box-shadow:
+0 15px 40px rgba(0,0,0,.15);
+
+transform:rotate(-2deg);
+
+}
+
+
+
+.letter p{
+
+font-size:21px;
+
+line-height:1.9;
+
+}
+
+
+
+.question{
+
+font-size:32px;
+
+margin:30px;
+
+color:#a8566b;
+
+}
+
+
+
+.buttons{
+
+display:flex;
+
+justify-content:center;
+
+gap:25px;
 
 }
 
@@ -198,36 +315,18 @@ button{
 
 #yes{
 
-    background:#b95f75;
+background:#b9687d;
 
-    color:white;
-
-}
-
-
-#yes:hover{
-
-    transform:translateY(-5px);
-
-    background:#a64b62;
+color:white;
 
 }
-
 
 
 #no{
 
-    background:#eee1dc;
+background:#eee0dc;
 
-    color:#6b4c55;
-
-}
-
-
-
-#no:hover{
-
-    transform:translateY(-5px);
+color:#604850;
 
 }
 
@@ -235,13 +334,13 @@ button{
 
 #result{
 
-    display:none;
+display:none;
 
-    margin-top:35px;
+margin-top:30px;
 
-    font-size:28px;
+font-size:28px;
 
-    color:#a64b62;
+color:#a8566b;
 
 }
 
@@ -249,9 +348,11 @@ button{
 
 .heart{
 
-    position:absolute;
+position:absolute;
 
-    animation:heart 3s forwards;
+font-size:35px;
+
+animation:heart 3s forwards;
 
 }
 
@@ -259,36 +360,32 @@ button{
 
 @keyframes heart{
 
-    from{
+0%{
 
-        opacity:1;
+transform:translateY(0) scale(.5);
 
-        transform:translateY(0) scale(.5);
-
-    }
-
-    to{
-
-        opacity:0;
-
-        transform:translateY(-300px) scale(1.5);
-
-    }
+opacity:1;
 
 }
+
+
+100%{
+
+transform:translateY(-300px) scale(1.5);
+
+opacity:0;
+
+}
+
+}
+
 
 
 @media(max-width:600px){
 
 .buttons{
 
-    flex-direction:column;
-
-}
-
-button{
-
-    width:200px;
+flex-direction:column;
 
 }
 
@@ -296,101 +393,193 @@ button{
 
 </style>
 
+
 </head>
 
 
 <body>
 
 
-<div class="glow"></div>
+<div class="bg"></div>
 
 
-<div class="container">
+
+<!-- SAYFA 1 -->
+
+
+<div class="page active" id="page1">
 
 
 <div class="record"></div>
 
 
-<h1>hey rio,</h1>
+<h1>NANA ♡</h1>
 
 
-<div id="text"></div>
+<div class="text" id="typing"></div>
+
+
+<button class="next" onclick="openPage()">
+
+Devam et ♡
+
+</button>
+
+
+</div>
+
+
+
+
+
+<!-- SAYFA 2 -->
+
+
+<div class="page" id="page2">
+
+
+<div class="letter">
+
+
+<p>
+
+Sana söylemek istediğim küçük bir şey var...
+
+<br><br>
+
+Bazı insanlar hayatımıza sessizce girer.
+
+Ama bazıları bir şarkı gibi kalır.
+
+<br><br>
+
+Seninle daha fazla anı biriktirmek,
+
+daha fazla gülmek ve yeni hikayeler yazmak istiyorum.
+
+</p>
+
+
+<div class="question">
+
+Benimle çıkar mısın? ♡
+
+</div>
+
 
 
 <div class="buttons">
 
+
 <button id="yes">
-Yep my dear❤️
+
+Evet ♡
+
 </button>
 
+
 <button id="no">
-Nah loser👎
+
+Biraz naz yapayım 🙈
+
 </button>
+
 
 </div>
 
 
 <div id="result">
 
-NOT A LOT, JUST FOREVER!!
+Bundan sonra hikâyemiz başlıyor ♡
+
+</div>
+
+
 
 </div>
 
 
 </div>
+
+
 
 
 
 <script>
 
 
-const message=
-"can i be your valentine?";
+/* sayfa 1 yazı */
 
+
+const msg=
+"Her hikâyenin bir başlangıcı vardır... Belki bizimki de küçük bir soruyla başlayabilir.";
 
 let i=0;
 
+
 function type(){
 
-if(i<message.length){
+if(i<msg.length){
 
-document.getElementById("text").innerHTML+=message[i];
+typing.innerHTML+=msg[i];
 
 i++;
 
-setTimeout(type,45);
+setTimeout(type,55);
 
 }
 
 }
+
 
 type();
 
 
 
-/* yıldızlar */
 
-for(let i=0;i<70;i++){
 
-let s=document.createElement("div");
+/* geçiş */
 
-s.className="star";
 
-s.style.left=Math.random()*100+"%";
+function openPage(){
 
-s.style.top=Math.random()*100+"%";
+page1.classList.remove("active");
 
-s.style.animationDelay=Math.random()*5+"s";
+setTimeout(()=>{
 
-document.body.appendChild(s);
+page2.classList.add("active");
+
+},300);
 
 }
 
 
 
-/* hayır kaçışı */
 
-const no=document.getElementById("no");
+/* arka plan */
+
+
+for(let i=0;i<50;i++){
+
+let d=document.createElement("div");
+
+d.className="dot";
+
+d.style.left=Math.random()*100+"%";
+
+d.style.animationDelay=Math.random()*8+"s";
+
+d.style.animationDuration=5+Math.random()*8+"s";
+
+
+document.querySelector(".bg").appendChild(d);
+
+}
+
+
+
+
+/* hayır kaçsın */
 
 
 no.onmouseover=()=>{
@@ -405,17 +594,22 @@ no.style.top=Math.random()*70+"vh";
 
 
 
+
+
 /* evet */
 
-document.getElementById("yes").onclick=()=>{
+
+yes.onclick=()=>{
 
 
 document.querySelector(".buttons").style.display="none";
 
-document.getElementById("result").style.display="block";
+result.style.display="block";
 
 
-for(let i=0;i<40;i++){
+for(let i=0;i<50;i++){
+
+setTimeout(()=>{
 
 let h=document.createElement("div");
 
@@ -427,17 +621,20 @@ h.style.left=Math.random()*100+"vw";
 
 h.style.top="80vh";
 
+
 document.body.appendChild(h);
 
 
 setTimeout(()=>h.remove(),3000);
 
 
+},i*60);
+
+
 }
 
 
 };
-
 
 
 </script>
