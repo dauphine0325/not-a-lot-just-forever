@@ -1,240 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+from pathlib import Path
+
+html = """<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>For Rio ❤️</title>
-
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body{
-    background:linear-gradient(135deg,#ffe5ee,#ffd6e7);
-    font-family:Georgia,serif;
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    overflow-x:hidden;
-    padding:20px;
-}
-
-.page{
-    display:none;
-    width:100%;
-    max-width:650px;
-    background:rgba(255,255,255,.92);
-    padding:30px;
-    border-radius:25px;
-    text-align:center;
-    box-shadow:0 15px 40px rgba(0,0,0,.15);
-}
-
-.page.active{
-    display:block;
-}
-
-h1,h2{
-    color:#d63384;
-    margin-bottom:15px;
-}
-
-p{
-    color:#444;
-    line-height:1.8;
-    font-size:18px;
-}
-
-button{
-    margin-top:20px;
-    padding:13px 25px;
-    border:none;
-    border-radius:30px;
-    font-size:17px;
-    cursor:pointer;
-    transition:.3s;
-}
-
-button:hover{
-    transform:scale(1.05);
-}
-
-#yes{
-    background:#ff4d94;
-    color:white;
-}
-
-#no{
-    background:#ececec;
-}
-
-.next{
-    background:#ff7eb3;
-    color:white;
-}
-
-img{
-    width:100%;
-    max-width:420px;
-    border-radius:20px;
-    margin:20px auto;
-    display:block;
-}
-
-.heart{
-    position:fixed;
-    font-size:30px;
-    animation:fly 3s linear forwards;
-    pointer-events:none;
-}
-
-@keyframes fly{
-    to{
-        transform:translateY(-500px);
-        opacity:0;
-    }
-}
-</style>
-</head>
-
-<body>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Georgia,serif;min-height:100vh;display:flex;justify-content:center;align-items:center;background:linear-gradient(135deg,#ffe5ee,#ffd6e7);overflow-x:hidden;padding:20px}
+.stars{position:fixed;inset:0;z-index:-1}.star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;animation:twinkle 3s infinite alternate}
+@keyframes twinkle{from{opacity:.2;transform:scale(.6)}to{opacity:1;transform:scale(1.5)}}
+.page{display:none;max-width:650px;width:100%;background:rgba(255,255,255,.92);padding:30px;border-radius:22px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.15)}
+.active{display:block}h1,h2{color:#d63384;margin-bottom:15px}p{font-size:18px;line-height:1.7}
+button{padding:12px 24px;border:none;border-radius:25px;margin:10px;cursor:pointer}
+.next,#yes{background:#ff5ca8;color:#fff}#no{background:#ddd}
+img{width:100%;max-width:420px;border-radius:18px;margin:18px auto;display:block;cursor:pointer;transition:.3s}
+img:hover{transform:scale(1.03)}
+.viewer{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);justify-content:center;align-items:center;backdrop-filter:blur(8px)}
+.viewer img{max-width:90%;max-height:90%;box-shadow:0 0 30px #ff7eb3}
+.heart{position:fixed;font-size:28px;animation:up 3s forwards}
+@keyframes up{to{transform:translateY(-420px);opacity:0}}
+</style></head><body>
+<div class="stars" id="stars"></div>
+<div class="viewer" id="viewer"><img id="viewerImg"></div>
 
 <div id="p1" class="page active">
-
-<h1>for my rio 💗</h1>
-
-<p id="typing"></p>
-
-<button class="next" onclick="show(2)">
-click here!!
-</button>
-
-</div>
+<h1>for my rio 💗</h1><p id="typing"></p>
+<button class="next" onclick="show(2)">click here!!</button></div>
 
 <div id="p2" class="page">
-
-<p>
-hey rio, no matter how much or how often people hurt each other 
-<br><br>
-loving someone is never a waste.
-<br><br>
-
-<b style="color:#ff4d94;">
-can i be your valentine?
-</b>
-
-</p>
-
-<button id="yes">yep my dear ❤️</button>
-<button id="no">nah loser 👎</button>
-
-<div id="after" style="display:none">
-
-<h2>NOT A LOT, JUST FOREVER !!</h2>
-
-<button class="next" onclick="show(3)">
-one more thing,,
-</button>
-
-</div>
-
+<p>hey rio, no matter how much or how often people hurt each other<br><br>loving someone is never a waste.<br><br><b style="color:#ff5ca8">can i be your valentine?</b></p>
+<button id="yes">yep my dear ❤️</button><button id="no">nah loser 👎</button>
+<div id="after" style="display:none"><h2>NOT A LOT, JUST FOREVER !!</h2><button class="next" onclick="show(3)">one more thing,,</button></div>
 </div>
 
 <div id="p3" class="page">
-
-<h1>me and my rio against the worlds!!</h1>
-
-<img src="Screenshot_20260720_025536_Gallery.jpg" alt="Photo 1">
-
+<h1>me and my rio against the world!!</h1>
+<img src="Screenshot_20260720_025536_Gallery.jpg">
 <h2>us in every universe 💚</h2>
-
-<img src="Screenshot_20260720_024420_Google.jpg" alt="Photo 2">
-
+<img src="Screenshot_20260720_024420_Google.jpg">
 </div>
 
 <script>
-
+for(let i=0;i<120;i++){let s=document.createElement('div');s.className='star';s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';s.style.animationDelay=Math.random()*3+'s';stars.appendChild(s);}
 const text="'summer is almost over, i was in love with her, more than she knew, more than even i knew'";
+let i=0;(function t(){if(i<text.length){typing.textContent+=text[i++];setTimeout(t,45)}})();
+function show(n){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('p'+n).classList.add('active')}
+function move(){no.style.position='fixed';no.style.left=Math.random()*(innerWidth-140)+'px';no.style.top=Math.random()*(innerHeight-70)+'px'}
+no.onmouseover=move;no.onclick=e=>{e.preventDefault();move()};no.ontouchstart=e=>{e.preventDefault();move()};
+yes.onclick=()=>{yes.style.display='none';no.style.display='none';after.style.display='block';for(let j=0;j<40;j++)setTimeout(()=>{let h=document.createElement('div');h.className='heart';h.textContent='❤️';h.style.left=Math.random()*innerWidth+'px';h.style.top=(innerHeight-30)+'px';document.body.appendChild(h);setTimeout(()=>h.remove(),3000)},j*70)}
+document.querySelectorAll('img').forEach(im=>im.onclick=()=>{viewer.style.display='flex';viewerImg.src=im.src;});
+viewer.onclick=()=>viewer.style.display='none';
+</script></body></html>"""
+path=Path("/mnt/data/index.html")
+path.write_text(html,encoding="utf-8")
+print(path)
 
-let i = 0;
-
-function type(){
-    if(i < text.length){
-        document.getElementById("typing").textContent += text.charAt(i);
-        i++;
-        setTimeout(type,45);
-    }
-}
-
-type();
-
-function show(n){
-    document.querySelectorAll(".page").forEach(page=>{
-        page.classList.remove("active");
-    });
-
-    document.getElementById("p"+n).classList.add("active");
-}
-
-const no=document.getElementById("no");
-
-function move(){
-
-    const maxX=window.innerWidth-140;
-    const maxY=window.innerHeight-70;
-
-    no.style.position="fixed";
-    no.style.left=Math.random()*maxX+"px";
-    no.style.top=Math.random()*maxY+"px";
-}
-
-no.addEventListener("mouseover",move);
-
-no.addEventListener("click",function(e){
-    e.preventDefault();
-    move();
-});
-
-no.addEventListener("touchstart",function(e){
-    e.preventDefault();
-    move();
-},{passive:false});
-
-document.getElementById("yes").onclick=function(){
-
-    document.getElementById("yes").style.display="none";
-    no.style.display="none";
-    document.getElementById("after").style.display="block";
-
-    for(let j=0;j<45;j++){
-
-        setTimeout(function(){
-
-            let heart=document.createElement("div");
-
-            heart.className="heart";
-            heart.innerHTML="❤️";
-
-            heart.style.left=Math.random()*window.innerWidth+"px";
-            heart.style.top=(window.innerHeight-20)+"px";
-
-            document.body.appendChild(heart);
-
-            setTimeout(()=>{
-                heart.remove();
-            },3000);
-
-        },j*70);
-
-    }
-
-};
-
-</script>
-
-</body>
-</html>
