@@ -12,18 +12,14 @@
     box-sizing:border-box;
 }
 
-html,body{
-    width:100%;
-    min-height:100dvh;
-    overflow-x:hidden;
-}
-
 body{
+    background:linear-gradient(135deg,#ffe5ee,#ffd6e7);
     font-family:Georgia,serif;
-    background:#f8e8ec;
+    min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
+    overflow-x:hidden;
     padding:20px;
 }
 
@@ -31,76 +27,89 @@ body{
     display:none;
     width:100%;
     max-width:650px;
-    background:rgba(255,255,255,.75);
-    backdrop-filter:blur(10px);
-    border-radius:20px;
+    background:rgba(255,255,255,.92);
     padding:30px;
+    border-radius:25px;
     text-align:center;
+    box-shadow:0 15px 40px rgba(0,0,0,.15);
 }
 
 .page.active{
     display:block;
 }
 
-h1,h2,p{
-    margin:15px 0;
+h1,h2{
+    color:#d63384;
+    margin-bottom:15px;
+}
+
+p{
+    color:#444;
+    line-height:1.8;
+    font-size:18px;
 }
 
 button{
-    padding:12px 24px;
+    margin-top:20px;
+    padding:13px 25px;
     border:none;
     border-radius:30px;
+    font-size:17px;
     cursor:pointer;
-    font-size:16px;
-    margin:10px;
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
 }
 
 #yes{
-    background:#c2185b;
+    background:#ff4d94;
     color:white;
 }
 
 #no{
-    background:#ddd;
+    background:#ececec;
+}
+
+.next{
+    background:#ff7eb3;
+    color:white;
 }
 
 img{
     width:100%;
     max-width:420px;
-    display:block;
+    border-radius:20px;
     margin:20px auto;
-    border-radius:15px;
+    display:block;
 }
 
 .heart{
     position:fixed;
-    font-size:28px;
+    font-size:30px;
     animation:fly 3s linear forwards;
     pointer-events:none;
 }
 
 @keyframes fly{
-    from{
-        transform:translateY(0);
-        opacity:1;
-    }
     to{
-        transform:translateY(-350px);
+        transform:translateY(-500px);
         opacity:0;
     }
 }
 </style>
-
 </head>
+
 <body>
 
 <div id="p1" class="page active">
 
-<h1>for my rio,</h1>
+<h1>for my rio 💗</h1>
 
 <p id="typing"></p>
 
-<button onclick="show(2)">
+<button class="next" onclick="show(2)">
 click here!!
 </button>
 
@@ -109,27 +118,26 @@ click here!!
 <div id="p2" class="page">
 
 <p>
-hey rio,
+hey rio,no matter how much or how often people hurt each other 
 <br><br>
-loving someone is never waste.
+loving someone is never a waste.
 <br><br>
-<b>can i be your valentine?</b>
+
+<b style="color:#ff4d94;">
+can i be your valentine?
+</b>
+
 </p>
 
-<button id="yes">
-yep my dear ❤️
-</button>
-
-<button id="no">
-nah loser 👎
-</button>
+<button id="yes">yep my dear ❤️</button>
+<button id="no">nah loser 👎</button>
 
 <div id="after" style="display:none">
 
-<h2>NOT A LOT, JUST FOREVER!!</h2>
+<h2>NOT A LOT, JUST FOREVER !!</h2>
 
-<button onclick="show(3)">
-one more thing
+<button class="next" onclick="show(3)">
+one more thing,,
 </button>
 
 </div>
@@ -138,25 +146,26 @@ one more thing
 
 <div id="p3" class="page">
 
-<h1>me and my rio against the world</h1>
+<h1>me and my rio against the worlds!!</h1>
 
-<img src="Screenshot_20260720_025536_Gallery.jpg">
+<img src="Screenshot_20260720_025536_Gallery.jpg" alt="Photo 1">
 
-<h2>us in every universe</h2>
+<h2>us in every universe 💚</h2>
 
-<img src="Screenshot_20260720_024420_Google.jpg">
+<img src="Screenshot_20260720_024420_Google.jpg" alt="Photo 2">
 
 </div>
 
 <script>
 
-const txt="'summer is almost over, i was in love with her, more than she knew, more than even i knew'";
+const text="'summer is almost over, i was in love with her, more than she knew, more than even i knew'";
 
-let i=0;
+let i = 0;
 
 function type(){
-    if(i<txt.length){
-        document.getElementById("typing").textContent+=txt[i++];
+    if(i < text.length){
+        document.getElementById("typing").textContent += text.charAt(i);
+        i++;
         setTimeout(type,45);
     }
 }
@@ -164,7 +173,10 @@ function type(){
 type();
 
 function show(n){
-    document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+    document.querySelectorAll(".page").forEach(page=>{
+        page.classList.remove("active");
+    });
+
     document.getElementById("p"+n).classList.add("active");
 }
 
@@ -172,21 +184,22 @@ const no=document.getElementById("no");
 
 function move(){
 
+    const maxX=window.innerWidth-140;
+    const maxY=window.innerHeight-70;
+
     no.style.position="fixed";
-
-    no.style.left=Math.random()*(window.innerWidth-120)+"px";
-
-    no.style.top=Math.random()*(window.innerHeight-70)+"px";
+    no.style.left=Math.random()*maxX+"px";
+    no.style.top=Math.random()*maxY+"px";
 }
 
 no.addEventListener("mouseover",move);
 
-no.addEventListener("click",(e)=>{
+no.addEventListener("click",function(e){
     e.preventDefault();
     move();
 });
 
-no.addEventListener("touchstart",(e)=>{
+no.addEventListener("touchstart",function(e){
     e.preventDefault();
     move();
 },{passive:false});
@@ -194,34 +207,32 @@ no.addEventListener("touchstart",(e)=>{
 document.getElementById("yes").onclick=function(){
 
     document.getElementById("yes").style.display="none";
-
     no.style.display="none";
-
     document.getElementById("after").style.display="block";
 
-    for(let j=0;j<40;j++){
+    for(let j=0;j<45;j++){
 
-        setTimeout(()=>{
+        setTimeout(function(){
 
-            let h=document.createElement("div");
+            let heart=document.createElement("div");
 
-            h.className="heart";
+            heart.className="heart";
+            heart.innerHTML="❤️";
 
-            h.innerHTML="❤";
+            heart.style.left=Math.random()*window.innerWidth+"px";
+            heart.style.top=(window.innerHeight-20)+"px";
 
-            h.style.left=Math.random()*window.innerWidth+"px";
+            document.body.appendChild(heart);
 
-            h.style.top=(window.innerHeight-50)+"px";
-
-            document.body.appendChild(h);
-
-            setTimeout(()=>h.remove(),3000);
+            setTimeout(()=>{
+                heart.remove();
+            },3000);
 
         },j*70);
 
     }
 
-}
+};
 
 </script>
 
