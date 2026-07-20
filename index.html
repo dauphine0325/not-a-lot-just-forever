@@ -1,57 +1,229 @@
-from pathlib import Path
-html="""<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>For Rio</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Rio ❤️</title>
+
 <style>
-body{margin:0;font-family:Georgia;background:#f8e8ec;display:flex;justify-content:center;align-items:center;height:100vh;overflow:hidden}
-.page{display:none;background:#fff8;padding:30px;border-radius:20px;width:90%;max-width:650px;text-align:center;backdrop-filter:blur(8px)}
-.page.active{display:block}
-button{padding:12px 24px;border:none;border-radius:25px;cursor:pointer;margin:10px}
-#yes{background:#c06;color:#fff}#no{background:#ddd}
-img{width:100%;max-width:420px;border-radius:15px;margin:15px auto;display:block}
-.heart{position:fixed;font-size:28px;animation:up 3s forwards}
-@keyframes up{to{transform:translateY(-350px);opacity:0}}
-</style></head><body>
-<div id=p1 class="page active">
-<h1>for my rio,</h1><p id=typing></p>
-<button onclick="show(2)">click here!!</button></div>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-<div id=p2 class=page>
-<p>hey rio,<br><br>loving someone is never waste.<br><br><b>can i be your valentine?</b></p>
-<button id=yes>yep my dear ❤️</button>
-<button id=no>nah loser 👎</button>
-<div id=after style="display:none">
+html,body{
+    width:100%;
+    min-height:100dvh;
+    overflow-x:hidden;
+}
+
+body{
+    font-family:Georgia,serif;
+    background:#f8e8ec;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.page{
+    display:none;
+    width:100%;
+    max-width:650px;
+    background:rgba(255,255,255,.75);
+    backdrop-filter:blur(10px);
+    border-radius:20px;
+    padding:30px;
+    text-align:center;
+}
+
+.page.active{
+    display:block;
+}
+
+h1,h2,p{
+    margin:15px 0;
+}
+
+button{
+    padding:12px 24px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    font-size:16px;
+    margin:10px;
+}
+
+#yes{
+    background:#c2185b;
+    color:white;
+}
+
+#no{
+    background:#ddd;
+}
+
+img{
+    width:100%;
+    max-width:420px;
+    display:block;
+    margin:20px auto;
+    border-radius:15px;
+}
+
+.heart{
+    position:fixed;
+    font-size:28px;
+    animation:fly 3s linear forwards;
+    pointer-events:none;
+}
+
+@keyframes fly{
+    from{
+        transform:translateY(0);
+        opacity:1;
+    }
+    to{
+        transform:translateY(-350px);
+        opacity:0;
+    }
+}
+</style>
+
+</head>
+<body>
+
+<div id="p1" class="page active">
+
+<h1>for my rio,</h1>
+
+<p id="typing"></p>
+
+<button onclick="show(2)">
+click here!!
+</button>
+
+</div>
+
+<div id="p2" class="page">
+
+<p>
+hey rio,
+<br><br>
+loving someone is never waste.
+<br><br>
+<b>can i be your valentine?</b>
+</p>
+
+<button id="yes">
+yep my dear ❤️
+</button>
+
+<button id="no">
+nah loser 👎
+</button>
+
+<div id="after" style="display:none">
+
 <h2>NOT A LOT, JUST FOREVER!!</h2>
-<button onclick="show(3)">one more thing 💚</button>
-</div></div>
 
-<div id=p3 class=page>
-<h1>me and my rio against the worlds</h1>
+<button onclick="show(3)">
+one more thing
+</button>
+
+</div>
+
+</div>
+
+<div id="p3" class="page">
+
+<h1>me and my rio against the world</h1>
+
 <img src="Screenshot_20260720_025536_Gallery.jpg">
-<h2>us in every universe </h2>
+
+<h2>us in every universe</h2>
+
 <img src="Screenshot_20260720_024420_Google.jpg">
+
 </div>
 
 <script>
+
 const txt="'summer is almost over, i was in love with her, more than she knew, more than even i knew'";
-let i=0;function type(){if(i<txt.length){typing.textContent+=txt[i++];setTimeout(type,45)}}type();
-function show(n){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('p'+n).classList.add('active')}
-const no=document.getElementById('no');
-function move(){no.style.position='fixed';no.style.left=Math.random()*(window.innerWidth-120)+'px';no.style.top=Math.random()*(window.innerHeight-60)+'px'}
-no.addEventListener('mouseover',move);
-no.addEventListener('click',e=>{e.preventDefault();move();});
-no.addEventListener('touchstart',e=>{e.preventDefault();move();},{passive:false});
-document.getElementById('yes').onclick=()=>{
-document.getElementById('yes').style.display='none';
-no.style.display='none';
-after.style.display='block';
-for(let j=0;j<40;j++)setTimeout(()=>{
-let h=document.createElement('div');
-h.className='heart';h.innerHTML='❤';
-h.style.left=Math.random()*window.innerWidth+'px';
-h.style.top=(window.innerHeight-50)+'px';
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),3000);
-},j*70);
+
+let i=0;
+
+function type(){
+    if(i<txt.length){
+        document.getElementById("typing").textContent+=txt[i++];
+        setTimeout(type,45);
+    }
 }
-</script></body></html>"""
-p=Path('/mnt/data/index.html');p.write_text(html,encoding='utf8')
-print(p)
+
+type();
+
+function show(n){
+    document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+    document.getElementById("p"+n).classList.add("active");
+}
+
+const no=document.getElementById("no");
+
+function move(){
+
+    no.style.position="fixed";
+
+    no.style.left=Math.random()*(window.innerWidth-120)+"px";
+
+    no.style.top=Math.random()*(window.innerHeight-70)+"px";
+}
+
+no.addEventListener("mouseover",move);
+
+no.addEventListener("click",(e)=>{
+    e.preventDefault();
+    move();
+});
+
+no.addEventListener("touchstart",(e)=>{
+    e.preventDefault();
+    move();
+},{passive:false});
+
+document.getElementById("yes").onclick=function(){
+
+    document.getElementById("yes").style.display="none";
+
+    no.style.display="none";
+
+    document.getElementById("after").style.display="block";
+
+    for(let j=0;j<40;j++){
+
+        setTimeout(()=>{
+
+            let h=document.createElement("div");
+
+            h.className="heart";
+
+            h.innerHTML="❤";
+
+            h.style.left=Math.random()*window.innerWidth+"px";
+
+            h.style.top=(window.innerHeight-50)+"px";
+
+            document.body.appendChild(h);
+
+            setTimeout(()=>h.remove(),3000);
+
+        },j*70);
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
